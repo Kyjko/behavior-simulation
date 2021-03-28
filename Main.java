@@ -11,12 +11,12 @@ public class Main extends Canvas {
     final ArrayList<Sim> sims;
     final float chance_of_monster = 0.1f;
     final float chance_of_death_after_warning = 0.03f;
-    final int N = 500;
+    final int N = 1440;
     final int I = 2560;
     final int W = 2560;
-    final int H = 500;
+    final int H = 1440;
 
-    final float dist = N/3.5f;
+    final float dist = N/4f;
 
     final int[] current_coward_count;
     final int[] current_altruists_count;
@@ -144,7 +144,7 @@ public class Main extends Canvas {
         for (int i = 0; i < N; i++) {
             if(i <= dist) {
                 sims.add(new Sim(i, simtype.Coward));
-            } else if(i >= dist && i <= 2*dist) {
+            } else if(i >= dist && i <= 2.7*dist) {
                 sims.add(new Sim(i, simtype.Altruistic));
             } else {
                 sims.add(new Sim(i, simtype.GBAltruistic));
@@ -235,9 +235,9 @@ public class Main extends Canvas {
             int cga = current_gbaltruists_count[i];
 
             g.setColor(Color.orange);
-            g.fillRect((int) (offset + ((float) W / (float) I) * i), 0, W / I, cc);
+            g.fillRect((int) (offset + ((float) W / (float) I) * i), 0, W / I, cc-5);
             g.setColor(Color.cyan);
-            g.fillRect((int) (offset + ((float) W / (float) I) * i), cc, W / I, ca);
+            g.fillRect((int) (offset + ((float) W / (float) I) * i), cc, W / I, ca-5);
             g.setColor(Color.green);
             g.fillRect((int) (offset + ((float) W / (float) I) * i), ca+cc, W / I, cga);
         }

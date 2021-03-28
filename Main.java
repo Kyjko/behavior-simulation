@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
 public class Main extends Canvas {
     final JFrame f;
     final ArrayList<Sim> sims;
-    final float chance_of_monster = 0.05f;
-    final float chance_of_death_after_warning = 0.05f;
+    final float chance_of_monster = 0.1f;
+    final float chance_of_death_after_warning = 0.03f;
     final int N = 500;
     final int I = 2560;
     final int W = 2560;
@@ -111,16 +111,17 @@ public class Main extends Canvas {
                             if (!peer.is_done_for_one_iter) {
                                 if(peer.type == this.type) {
                                     peer.is_alive = true;
+                                    if (r.nextFloat() <= chance_of_death_after_warning) {
+                                        this.is_alive = false;
+
+                                    } else {
+                                        sims.add(new Sim(this.id + N, this.type));
+                                    }
                                 } else {
                                     peer.is_alive = false;
-                                }
-                                peer.is_done_for_one_iter = true;
-                                if (r.nextFloat() <= chance_of_death_after_warning) {
-                                    this.is_alive = false;
-
-                                } else {
                                     sims.add(new Sim(this.id + N, this.type));
                                 }
+                                peer.is_done_for_one_iter = true;
                             }
 
                         } else {
